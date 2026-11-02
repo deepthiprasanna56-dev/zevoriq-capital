@@ -41,8 +41,9 @@ export default function MarketNews({ news = [] }) {
             {categories.map((cat) => (
               <button
                 key={cat}
+                type="button"
                 onClick={() => setActiveFilter(cat)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                   activeFilter === cat
                     ? 'bg-blue-600 text-white shadow-md'
                     : 'text-slate-400 hover:text-white'
@@ -59,7 +60,8 @@ export default function MarketNews({ news = [] }) {
           {filteredNews.map((article) => (
             <div
               key={article.id}
-              className="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-slate-800/80 flex flex-col justify-between group"
+              onClick={() => setSelectedArticle(article)}
+              className="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-slate-800/80 flex flex-col justify-between group cursor-pointer"
             >
               <div>
                 {/* Article Image Container */}
@@ -115,8 +117,12 @@ export default function MarketNews({ news = [] }) {
                 </span>
 
                 <button
-                  onClick={() => setSelectedArticle(article)}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 group-hover:text-blue-300 transition"
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedArticle(article);
+                  }}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-400 group-hover:text-blue-300 transition cursor-pointer"
                 >
                   <span>Read Full</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -180,8 +186,9 @@ export default function MarketNews({ news = [] }) {
             </div>
 
             <button
+              type="button"
               onClick={() => setSelectedArticle(null)}
-              className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl transition"
+              className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl transition cursor-pointer"
             >
               Close Briefing
             </button>

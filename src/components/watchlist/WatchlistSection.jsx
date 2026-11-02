@@ -56,8 +56,9 @@ export default function WatchlistSection({
           <div className="flex flex-wrap items-center gap-3">
             {/* Live Price Simulation Toggle */}
             <button
+              type="button"
               onClick={onToggleLiveSimulation}
-              className={`px-3 py-2 rounded-xl text-xs font-semibold border flex items-center gap-2 transition ${
+              className={`px-3 py-2 rounded-xl text-xs font-semibold border flex items-center gap-2 transition cursor-pointer ${
                 isLiveSimulationActive
                   ? 'bg-emerald-950/60 border-emerald-500/50 text-emerald-300'
                   : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
@@ -84,9 +85,10 @@ export default function WatchlistSection({
                   ))}
                 </select>
                 <button
+                  type="button"
                   onClick={handleAddStock}
                   disabled={!selectedAddSymbol}
-                  className="px-3 py-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-40 text-white text-xs font-bold rounded-lg transition flex items-center gap-1"
+                  className="px-3 py-1 bg-blue-600 hover:bg-blue-500 disabled:opacity-40 text-white text-xs font-bold rounded-lg transition flex items-center gap-1 cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Pin</span>
@@ -126,15 +128,17 @@ export default function WatchlistSection({
 
                       <div className="flex items-center gap-1">
                         <button
+                          type="button"
                           onClick={() => onOpenStockDetail(stock)}
-                          className="p-1.5 text-slate-400 hover:text-white rounded-lg transition"
+                          className="p-1.5 text-slate-400 hover:text-white rounded-lg transition cursor-pointer"
                           title="View Chart"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
                         <button
+                          type="button"
                           onClick={() => onToggleWatchlist(stock.symbol)}
-                          className="p-1.5 text-slate-500 hover:text-rose-400 rounded-lg transition"
+                          className="p-1.5 text-slate-500 hover:text-rose-400 rounded-lg transition cursor-pointer"
                           title="Remove from Watchlist"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -178,14 +182,16 @@ export default function WatchlistSection({
                   {/* Quick Action Footer */}
                   <div className="mt-4 pt-3 border-t border-slate-800/80 flex gap-2">
                     <button
+                      type="button"
                       onClick={() => onTradeStock(stock, 'buy')}
-                      className="flex-1 py-1.5 bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow-md shadow-emerald-950/40"
+                      className="flex-1 py-1.5 bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow-md shadow-emerald-950/40 cursor-pointer"
                     >
                       Buy
                     </button>
                     <button
+                      type="button"
                       onClick={() => onTradeStock(stock, 'sell')}
-                      className="flex-1 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 transition"
+                      className="flex-1 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl border border-slate-700 transition cursor-pointer"
                     >
                       Sell
                     </button>

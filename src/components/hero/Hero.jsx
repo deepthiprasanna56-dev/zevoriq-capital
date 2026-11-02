@@ -34,6 +34,17 @@ export default function Hero({ onStartTrading, onExploreMarkets, onQuickSelectSt
   const basePrice = featuredStock ? featuredStock.price : 138.25;
   const simulatedPrice = parseFloat((basePrice + priceDelta).toFixed(2));
 
+  // Timeframe-specific sparklines for the hero widget
+  const defaultSpark = featuredStock?.sparkline || [132.5, 133.8, 135.2, 134.6, 136.9, 137.5, 138.25];
+  const timeframeSparklines = {
+    '1D': defaultSpark,
+    '1W': [basePrice * 0.94, basePrice * 0.96, basePrice * 0.95, basePrice * 0.98, basePrice * 0.97, simulatedPrice],
+    '1M': [basePrice * 0.88, basePrice * 0.91, basePrice * 0.90, basePrice * 0.94, basePrice * 0.96, simulatedPrice],
+    '1Y': [basePrice * 0.65, basePrice * 0.72, basePrice * 0.80, basePrice * 0.88, basePrice * 0.93, simulatedPrice],
+  };
+
+  const currentSparkline = timeframeSparklines[activeTimeframe] || defaultSpark;
+
   const stats = [
     { label: 'Daily Trading Volume', value: '$4.8B+' },
     { label: 'Execution Speed', value: '< 15ms' },
@@ -84,21 +95,22 @@ export default function Hero({ onStartTrading, onExploreMarkets, onQuickSelectSt
             {/* CTA Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
+                type="button"
                 onClick={onStartTrading}
-                className="px-7 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 shadow-xl shadow-blue-600/30 hover:shadow-blue-600/50 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2.5"
+                className="px-7 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 shadow-xl shadow-blue-600/30 hover:shadow-blue-600/50 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2.5 cursor-pointer"
               >
                 <span>Start Trading Now</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <a
-                href="#markets"
+              <button
+                type="button"
                 onClick={onExploreMarkets}
-                className="px-6 py-3.5 rounded-xl font-semibold text-sm text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 transition flex items-center gap-2"
+                className="px-6 py-3.5 rounded-xl font-semibold text-sm text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 transition flex items-center gap-2 cursor-pointer"
               >
                 <BarChart3 className="w-4 h-4 text-blue-400" />
                 <span>Explore Live Markets</span>
-              </a>
+              </button>
             </div>
 
             {/* Trust and Compliance Highlights */}
@@ -167,8 +179,9 @@ export default function Hero({ onStartTrading, onExploreMarkets, onQuickSelectSt
                   {['1D', '1W', '1M', '1Y'].map((tf) => (
                     <button
                       key={tf}
+                      type="button"
                       onClick={() => setActiveTimeframe(tf)}
-                      className={`px-2.5 py-1 rounded-lg transition ${
+                      className={`px-2.5 py-1 rounded-lg transition cursor-pointer ${
                         activeTimeframe === tf
                           ? 'bg-blue-600 text-white shadow-sm'
                           : 'text-slate-400 hover:text-white'
@@ -180,7 +193,7 @@ export default function Hero({ onStartTrading, onExploreMarkets, onQuickSelectSt
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-mono">
                   <Activity className="w-3.5 h-3.5 animate-pulse" />
-                  <span>Real-time Stream</span>
+                  <span>Real-time Stream ({activeTimeframe})</span>
                 </div>
               </div>
 
@@ -197,7 +210,7 @@ export default function Hero({ onStartTrading, onExploreMarkets, onQuickSelectSt
                   {/* Sparkline Expanded Chart */}
                   <div className="w-full h-full flex items-center justify-center">
                     <Sparkline
-                      data={featuredStock?.sparkline || [132.5, 133.8, 135.2, 134.6, 136.9, 137.5, 138.25]}
+                      data={currentSparkline}
                       isPositive={true}
                       width={380}
                       height={120}
@@ -227,14 +240,16 @@ export default function Hero({ onStartTrading, onExploreMarkets, onQuickSelectSt
               {/* Quick Trade Action in Hero */}
               <div className="pt-4 flex gap-2">
                 <button
+                  type="button"
                   onClick={() => onQuickSelectStock(featuredStock, 'buy')}
-                  className="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow-lg shadow-emerald-700/30 flex items-center justify-center gap-1"
+                  className="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow-lg shadow-emerald-700/30 flex items-center justify-center gap-1 cursor-pointer"
                 >
                   Quick Buy {featuredStock?.symbol || 'NVDA'}
                 </button>
                 <button
+                  type="button"
                   onClick={() => onQuickSelectStock(featuredStock, 'sell')}
-                  className="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs rounded-xl border border-slate-700 transition flex items-center justify-center gap-1"
+                  className="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs rounded-xl border border-slate-700 transition flex items-center justify-center gap-1 cursor-pointer"
                 >
                   Quick Sell
                 </button>
@@ -242,7 +257,7 @@ export default function Hero({ onStartTrading, onExploreMarkets, onQuickSelectSt
 
             </div>
 
-            {/* Floating Floating Stat Pill */}
+            {/* Floating Stat Pill */}
             <div className="hidden sm:flex absolute -bottom-6 -left-6 items-center gap-3 p-3.5 bg-slate-900/95 border border-slate-700 rounded-2xl shadow-xl backdrop-blur-xl">
               <div className="w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
                 <Sparkles className="w-5 h-5" />

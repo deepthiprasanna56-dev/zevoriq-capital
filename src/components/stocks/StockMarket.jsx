@@ -8,6 +8,7 @@ import {
   ArrowDownRight,
   Star,
   Eye,
+  X,
 } from 'lucide-react';
 import Sparkline from '../common/Sparkline';
 
@@ -21,7 +22,7 @@ export default function StockMarket({
   const [search, setSearch] = useState('');
   const [selectedSector, setSelectedSector] = useState('All');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' | 'table'
-  const [sortBy, setSortBy] = useState('popular'); // 'popular' | 'gainers' | 'losers' | 'marketCap'
+  const [sortBy, setSortBy] = useState('popular'); // 'popular' | 'gainers' | 'losers' | 'price'
 
   const sectors = ['All', 'Semiconductors & AI', 'Consumer Electronics', 'Cloud & Enterprise AI', 'Automotive & Clean Tech', 'Banking & Financials'];
 
@@ -74,8 +75,18 @@ export default function StockMarket({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Filter stocks..."
-                className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                className="w-full pl-9 pr-8 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
               />
+              {search && (
+                <button
+                  type="button"
+                  onClick={() => setSearch('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white cursor-pointer"
+                  title="Clear filter"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
 
             {/* Sort Dropdown */}
@@ -93,8 +104,9 @@ export default function StockMarket({
             {/* Grid / Table Toggle */}
             <div className="flex bg-slate-900 p-1 rounded-xl border border-slate-800">
               <button
+                type="button"
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-lg transition ${
+                className={`p-1.5 rounded-lg transition cursor-pointer ${
                   viewMode === 'grid' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
                 }`}
                 title="Grid Cards View"
@@ -102,8 +114,9 @@ export default function StockMarket({
                 <LayoutGrid className="w-4 h-4" />
               </button>
               <button
+                type="button"
                 onClick={() => setViewMode('table')}
-                className={`p-1.5 rounded-lg transition ${
+                className={`p-1.5 rounded-lg transition cursor-pointer ${
                   viewMode === 'table' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'
                 }`}
                 title="Pro Table View"
@@ -119,8 +132,9 @@ export default function StockMarket({
           {sectors.map((sec) => (
             <button
               key={sec}
+              type="button"
               onClick={() => setSelectedSector(sec)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 selectedSector === sec
                   ? 'bg-blue-600/20 text-blue-400 border border-blue-500/40'
                   : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800/80 hover:bg-slate-800'
@@ -162,15 +176,17 @@ export default function StockMarket({
 
                       <div className="flex items-center gap-1">
                         <button
+                          type="button"
                           onClick={() => onOpenStockDetail(stock)}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
                           title="View Chart & Analysis"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
                         <button
+                          type="button"
                           onClick={() => onToggleWatchlist(stock.symbol)}
-                          className={`p-1.5 rounded-lg transition ${
+                          className={`p-1.5 rounded-lg transition cursor-pointer ${
                             isWatchlisted
                               ? 'text-amber-400 bg-amber-400/10'
                               : 'text-slate-400 hover:text-amber-400 hover:bg-slate-800'
@@ -225,14 +241,16 @@ export default function StockMarket({
                   {/* Buy / Sell Quick Buttons */}
                   <div className="mt-5 pt-3 border-t border-slate-800/80 grid grid-cols-2 gap-2">
                     <button
+                      type="button"
                       onClick={() => onTradeStock(stock, 'buy')}
-                      className="py-2 bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow-md shadow-emerald-950/40 flex items-center justify-center gap-1"
+                      className="py-2 bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition shadow-md shadow-emerald-950/40 flex items-center justify-center gap-1 cursor-pointer"
                     >
                       Buy
                     </button>
                     <button
+                      type="button"
                       onClick={() => onTradeStock(stock, 'sell')}
-                      className="py-2 bg-rose-600/80 hover:bg-rose-500 text-white font-bold text-xs rounded-xl transition shadow-md shadow-rose-950/40 flex items-center justify-center gap-1"
+                      className="py-2 bg-rose-600/80 hover:bg-rose-500 text-white font-bold text-xs rounded-xl transition shadow-md shadow-rose-950/40 flex items-center justify-center gap-1 cursor-pointer"
                     >
                       Sell
                     </button>
@@ -337,8 +355,9 @@ export default function StockMarket({
                         <td className="py-3.5 px-4 text-right">
                           <div className="inline-flex items-center gap-1.5">
                             <button
+                              type="button"
                               onClick={() => onToggleWatchlist(stock.symbol)}
-                              className={`p-1.5 rounded-lg transition ${
+                              className={`p-1.5 rounded-lg transition cursor-pointer ${
                                 isWatchlisted
                                   ? 'text-amber-400 bg-amber-400/10'
                                   : 'text-slate-400 hover:text-white'
@@ -348,20 +367,23 @@ export default function StockMarket({
                               <Star className={`w-4 h-4 ${isWatchlisted ? 'fill-amber-400' : ''}`} />
                             </button>
                             <button
+                              type="button"
                               onClick={() => onOpenStockDetail(stock)}
-                              className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold transition"
+                              className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold transition cursor-pointer"
                             >
                               Analyze
                             </button>
                             <button
+                              type="button"
                               onClick={() => onTradeStock(stock, 'buy')}
-                              className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition"
+                              className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition cursor-pointer"
                             >
                               Buy
                             </button>
                             <button
+                              type="button"
                               onClick={() => onTradeStock(stock, 'sell')}
-                              className="px-3 py-1 bg-rose-600/80 hover:bg-rose-500 text-white rounded-lg text-xs font-bold transition"
+                              className="px-3 py-1 bg-rose-600/80 hover:bg-rose-500 text-white rounded-lg text-xs font-bold transition cursor-pointer"
                             >
                               Sell
                             </button>

@@ -1,6 +1,6 @@
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
-export default function TickerTape({ indices = [], stocks = [] }) {
+export default function TickerTape({ indices = [], stocks = [], onSelectAsset }) {
   // Combine indices and key stocks into one marquee stream
   const items = [
     ...indices.map((idx) => ({
@@ -8,17 +8,25 @@ export default function TickerTape({ indices = [], stocks = [] }) {
       price: idx.price,
       changePercent: idx.changePercent,
       isIndex: true,
+      raw: idx,
     })),
     ...stocks.slice(0, 8).map((stk) => ({
       symbol: stk.symbol,
       price: stk.price,
       changePercent: stk.changePercent,
       isIndex: false,
+      raw: stk,
     })),
   ];
 
   // Duplicate items for seamless infinite scroll
   const stream = [...items, ...items];
+
+  const handleClick = (item) => {
+    if (onSelectAsset) {
+      onSelectAsset(item);
+    }
+  };
 
   return (
     <div className="w-full bg-[#060910] border-y border-slate-800/80 overflow-hidden py-2.5 relative select-none z-20">
@@ -30,9 +38,12 @@ export default function TickerTape({ indices = [], stocks = [] }) {
         {stream.map((item, idx) => {
           const isPositive = item.changePercent >= 0;
           return (
-            <div
+            <button
               key={`${item.symbol}-${idx}`}
-              className="flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 transition-colors border border-slate-800/40 shrink-0"
+              type="button"
+              onClick={() => handleClick(item)}
+              className="flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-900/60 hover:bg-slate-800/90 hover:border-blue-500/50 transition-all border border-slate-800/40 shrink-0 cursor-pointer text-left"
+              title={`Click to inspect ${item.symbol}`}
             >
               <span className="font-bold text-slate-200">{item.symbol}</span>
               <span className="text-slate-300 font-semibold">
@@ -51,7 +62,7 @@ export default function TickerTape({ indices = [], stocks = [] }) {
                 {isPositive ? '+' : ''}
                 {item.changePercent.toFixed(2)}%
               </span>
-            </div>
+            </button>
           );
         })}
       </div>

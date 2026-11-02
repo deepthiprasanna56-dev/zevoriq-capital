@@ -94,14 +94,16 @@ export default function HoldingsTable({ holdings = [], onTradeHolding }) {
                   <td className="py-3.5 px-4 text-right">
                     <div className="inline-flex items-center gap-1.5">
                       <button
+                        type="button"
                         onClick={() => onTradeHolding(h, 'buy')}
-                        className="px-2.5 py-1 bg-emerald-600/80 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition"
+                        className="px-2.5 py-1 bg-emerald-600/80 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition cursor-pointer"
                       >
                         Buy More
                       </button>
                       <button
+                        type="button"
                         onClick={() => onTradeHolding(h, 'sell')}
-                        className="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-500 text-white rounded-lg text-xs font-bold transition"
+                        className="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-500 text-white rounded-lg text-xs font-bold transition cursor-pointer"
                       >
                         Sell
                       </button>

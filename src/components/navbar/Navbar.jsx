@@ -30,6 +30,15 @@ export default function Navbar({
     };
     window.addEventListener('scroll', handleScroll);
 
+    // Global shortcut '/' to open search modal
+    const handleKeyDown = (e) => {
+      if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
     // Live clock in EST / UTC
     const updateClock = () => {
       const now = new Date();
@@ -47,6 +56,7 @@ export default function Navbar({
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
       clearInterval(interval);
     };
   }, []);
@@ -70,6 +80,20 @@ export default function Navbar({
       )
     : [];
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    const id = href.replace('#', '');
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <>
       <header
@@ -82,7 +106,11 @@ export default function Navbar({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             {/* Logo and Brand */}
-            <a href="#home" className="flex items-center gap-2.5 group shrink-0">
+            <a
+              href="#home"
+              onClick={(e) => handleNavClick(e, '#home')}
+              className="flex items-center gap-2.5 group shrink-0 cursor-pointer"
+            >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-400 p-[1.5px] shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition">
                 <div className="w-full h-full bg-[#080c14] rounded-[10px] flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform" />
@@ -110,7 +138,8 @@ export default function Navbar({
                 <a
                   key={link.name}
                   href={link.href}
-                  className="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/70 transition-colors"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/70 transition-colors cursor-pointer"
                 >
                   {link.name}
                 </a>
@@ -127,9 +156,10 @@ export default function Navbar({
 
               {/* Quick Search Button */}
               <button
+                type="button"
                 onClick={() => setIsSearchOpen(true)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-xs text-slate-400 hover:text-slate-200 transition"
-                title="Search stocks"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-xs text-slate-400 hover:text-slate-200 transition cursor-pointer"
+                title="Search stocks (press /)"
               >
                 <Search className="w-3.5 h-3.5" />
                 <span className="hidden md:inline">Search</span>
@@ -170,8 +200,9 @@ export default function Navbar({
                     </div>
                   </div>
                   <button
+                    type="button"
                     onClick={onSignOut}
-                    className="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-xl transition"
+                    className="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-xl transition cursor-pointer"
                     title="Sign Out"
                   >
                     <LogOut className="w-4 h-4" />
@@ -180,14 +211,16 @@ export default function Navbar({
               ) : (
                 <div className="flex items-center gap-2">
                   <button
+                    type="button"
                     onClick={() => onOpenAuth('login')}
-                    className="hidden sm:inline-flex px-3.5 py-2 text-xs font-semibold text-slate-300 hover:text-white rounded-xl hover:bg-slate-800/80 transition"
+                    className="hidden sm:inline-flex px-3.5 py-2 text-xs font-semibold text-slate-300 hover:text-white rounded-xl hover:bg-slate-800/80 transition cursor-pointer"
                   >
                     Log In
                   </button>
                   <button
+                    type="button"
                     onClick={() => onOpenAuth('signup')}
-                    className="px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-xl shadow-md shadow-blue-600/30 transition transform active:scale-95"
+                    className="px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 rounded-xl shadow-md shadow-blue-600/30 transition transform active:scale-95 cursor-pointer"
                   >
                     Open Account
                   </button>
@@ -196,8 +229,9 @@ export default function Navbar({
 
               {/* Mobile Menu Toggle */}
               <button
+                type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="xl:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                className="xl:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
                 aria-label="Toggle navigation"
               >
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -240,8 +274,8 @@ export default function Navbar({
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-3 text-sm font-semibold text-slate-200 bg-slate-800/60 rounded-xl hover:bg-blue-600 hover:text-white transition"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="p-3 text-sm font-semibold text-slate-200 bg-slate-800/60 rounded-xl hover:bg-blue-600 hover:text-white transition cursor-pointer"
                 >
                   {link.name}
                 </a>
@@ -251,20 +285,22 @@ export default function Navbar({
             {!user && (
               <div className="flex gap-2 pt-3 border-t border-slate-800 mt-2">
                 <button
+                  type="button"
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     onOpenAuth('login');
                   }}
-                  className="flex-1 py-2.5 text-xs font-semibold text-slate-200 bg-slate-800 rounded-xl"
+                  className="flex-1 py-2.5 text-xs font-semibold text-slate-200 bg-slate-800 rounded-xl cursor-pointer"
                 >
                   Log In
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     onOpenAuth('signup');
                   }}
-                  className="flex-1 py-2.5 text-xs font-bold text-white bg-blue-600 rounded-xl"
+                  className="flex-1 py-2.5 text-xs font-bold text-white bg-blue-600 rounded-xl cursor-pointer"
                 >
                   Sign Up
                 </button>
@@ -292,9 +328,19 @@ export default function Navbar({
                 autoFocus
                 className="w-full bg-transparent text-white placeholder-slate-500 focus:outline-none text-sm"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="text-slate-400 hover:text-white text-xs px-1.5 py-0.5 rounded bg-slate-800 cursor-pointer"
+                >
+                  Clear
+                </button>
+              )}
               <button
+                type="button"
                 onClick={() => setIsSearchOpen(false)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg"
+                className="text-slate-400 hover:text-white p-1 rounded-lg cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -306,12 +352,13 @@ export default function Navbar({
                   {filteredStocks.map((stock) => (
                     <button
                       key={stock.symbol}
+                      type="button"
                       onClick={() => {
                         onQuickSearchSelect(stock);
                         setIsSearchOpen(false);
                         setSearchQuery('');
                       }}
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-800/80 transition text-left group"
+                      className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-800/80 transition text-left group cursor-pointer"
                     >
                       <div className="flex items-center gap-3">
                         <span className="text-xl">{stock.logo}</span>
@@ -351,11 +398,12 @@ export default function Navbar({
                     {popularStocks.slice(0, 6).map((s) => (
                       <button
                         key={s.symbol}
+                        type="button"
                         onClick={() => {
                           onQuickSearchSelect(s);
                           setIsSearchOpen(false);
                         }}
-                        className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-mono font-semibold transition"
+                        className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-mono font-semibold transition cursor-pointer"
                       >
                         {s.symbol}
                       </button>

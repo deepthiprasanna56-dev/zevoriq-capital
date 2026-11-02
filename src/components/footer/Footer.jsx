@@ -30,6 +30,25 @@ export default function Footer({ onShowToast }) {
     }
   };
 
+  const handleFooterLink = (e, targetId, customMessage) => {
+    e.preventDefault();
+    if (targetId) {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+    if (customMessage && onShowToast) {
+      onShowToast({
+        id: Date.now(),
+        type: 'info',
+        title: 'Service Notice',
+        message: customMessage,
+      });
+    }
+  };
+
   return (
     <>
       <footer className="bg-[#05080e] border-t border-slate-800/80 pt-16 pb-12 text-slate-400 text-xs">
@@ -71,7 +90,7 @@ export default function Footer({ onShowToast }) {
                   href="https://x.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
                   aria-label="X / Twitter"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -82,7 +101,7 @@ export default function Footer({ onShowToast }) {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
                   aria-label="LinkedIn"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -93,7 +112,7 @@ export default function Footer({ onShowToast }) {
                   href="https://github.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
                   aria-label="GitHub"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -104,7 +123,7 @@ export default function Footer({ onShowToast }) {
                   href="https://discord.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                  className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer"
                   aria-label="Discord Community"
                 >
                   <MessageSquare className="w-4 h-4" />
@@ -131,7 +150,7 @@ export default function Footer({ onShowToast }) {
                   />
                   <button
                     type="submit"
-                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl transition flex items-center gap-1.5 shadow-md shadow-blue-600/30"
+                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl transition flex items-center gap-1.5 shadow-md shadow-blue-600/30 cursor-pointer"
                   >
                     <span>Subscribe</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -155,11 +174,11 @@ export default function Footer({ onShowToast }) {
                 Markets & Assets
               </h5>
               <ul className="space-y-2">
-                <li><a href="#markets" className="hover:text-white transition">US Major Indices</a></li>
-                <li><a href="#stocks" className="hover:text-white transition">Trending Equities</a></li>
-                <li><a href="#markets" className="hover:text-white transition">Spot Digital Assets</a></li>
-                <li><a href="#markets" className="hover:text-white transition">Global Commodities</a></li>
-                <li><a href="#stocks" className="hover:text-white transition">Semiconductor Sector</a></li>
+                <li><a href="#markets" onClick={(e) => handleFooterLink(e, 'markets')} className="hover:text-white transition cursor-pointer">US Major Indices</a></li>
+                <li><a href="#stocks" onClick={(e) => handleFooterLink(e, 'stocks')} className="hover:text-white transition cursor-pointer">Trending Equities</a></li>
+                <li><a href="#markets" onClick={(e) => handleFooterLink(e, 'markets')} className="hover:text-white transition cursor-pointer">Spot Digital Assets</a></li>
+                <li><a href="#markets" onClick={(e) => handleFooterLink(e, 'markets')} className="hover:text-white transition cursor-pointer">Global Commodities</a></li>
+                <li><a href="#stocks" onClick={(e) => handleFooterLink(e, 'stocks')} className="hover:text-white transition cursor-pointer">Semiconductor Sector</a></li>
               </ul>
             </div>
 
@@ -168,11 +187,11 @@ export default function Footer({ onShowToast }) {
                 Trading Solutions
               </h5>
               <ul className="space-y-2">
-                <li><a href="#terminal" className="hover:text-white transition">Direct DMA Terminal</a></li>
-                <li><a href="#portfolio" className="hover:text-white transition">Portfolio Risk Modeling</a></li>
-                <li><a href="#watchlist" className="hover:text-white transition">Multi-Asset Watchlists</a></li>
-                <li><a href="#terminal" className="hover:text-white transition">Smart Limit Orders</a></li>
-                <li><a href="#why-us" className="hover:text-white transition">Sub-15ms Co-location</a></li>
+                <li><a href="#terminal" onClick={(e) => handleFooterLink(e, 'terminal')} className="hover:text-white transition cursor-pointer">Direct DMA Terminal</a></li>
+                <li><a href="#portfolio" onClick={(e) => handleFooterLink(e, 'portfolio')} className="hover:text-white transition cursor-pointer">Portfolio Risk Modeling</a></li>
+                <li><a href="#watchlist" onClick={(e) => handleFooterLink(e, 'watchlist')} className="hover:text-white transition cursor-pointer">Multi-Asset Watchlists</a></li>
+                <li><a href="#terminal" onClick={(e) => handleFooterLink(e, 'terminal')} className="hover:text-white transition cursor-pointer">Smart Limit Orders</a></li>
+                <li><a href="#why-us" onClick={(e) => handleFooterLink(e, 'why-us')} className="hover:text-white transition cursor-pointer">Sub-15ms Co-location</a></li>
               </ul>
             </div>
 
@@ -181,11 +200,11 @@ export default function Footer({ onShowToast }) {
                 Intelligence & Tools
               </h5>
               <ul className="space-y-2">
-                <li><a href="#news" className="hover:text-white transition">Market Wire News</a></li>
-                <li><a href="#news" className="hover:text-white transition">Macro Sentiment Feed</a></li>
-                <li><a href="#why-us" className="hover:text-white transition">Institutional Platform</a></li>
-                <li><a href="#home" className="hover:text-white transition">API Documentation</a></li>
-                <li><a href="#home" className="hover:text-white transition">System Status (99.99%)</a></li>
+                <li><a href="#news" onClick={(e) => handleFooterLink(e, 'news')} className="hover:text-white transition cursor-pointer">Market Wire News</a></li>
+                <li><a href="#news" onClick={(e) => handleFooterLink(e, 'news')} className="hover:text-white transition cursor-pointer">Macro Sentiment Feed</a></li>
+                <li><a href="#why-us" onClick={(e) => handleFooterLink(e, 'why-us')} className="hover:text-white transition cursor-pointer">Institutional Platform</a></li>
+                <li><button type="button" onClick={(e) => handleFooterLink(e, null, 'Zevoriq API v3.4 documentation active: WebSocket / FIX streaming operational.')} className="hover:text-white transition cursor-pointer text-left">API Documentation</button></li>
+                <li><button type="button" onClick={(e) => handleFooterLink(e, null, 'All 12 Global Core Matching Nodes operational. 99.998% SLA maintained.')} className="hover:text-white transition cursor-pointer text-left">System Status (99.99%)</button></li>
               </ul>
             </div>
 
@@ -218,22 +237,25 @@ export default function Footer({ onShowToast }) {
 
             <div className="flex flex-wrap items-center gap-4">
               <button
+                type="button"
                 onClick={() => setLegalModalType('privacy')}
-                className="hover:text-slate-300 transition"
+                className="hover:text-slate-300 transition cursor-pointer"
               >
                 Privacy Safeguard
               </button>
               <span>•</span>
               <button
+                type="button"
                 onClick={() => setLegalModalType('terms')}
-                className="hover:text-slate-300 transition"
+                className="hover:text-slate-300 transition cursor-pointer"
               >
                 Terms of Execution
               </button>
               <span>•</span>
               <button
+                type="button"
                 onClick={() => setLegalModalType('risk')}
-                className="hover:text-slate-300 transition text-amber-400/90 font-semibold"
+                className="hover:text-slate-300 transition text-amber-400/90 font-semibold cursor-pointer"
               >
                 FINRA / SIPC Disclosure
               </button>

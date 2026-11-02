@@ -256,9 +256,23 @@ export default function App() {
         popularStocks={stocks}
       />
 
-      {/* 2. Live Marquee Ticker Tape */}
+      {/* 2. Live Marquee Ticker Tape with Clickable Ticker Items */}
       <div className="pt-16 sm:pt-20">
-        <TickerTape indices={indices} stocks={stocks} />
+        <TickerTape
+          indices={indices}
+          stocks={stocks}
+          onSelectAsset={(item) => {
+            if (!item.isIndex) {
+              handleTradeStock(item.raw, 'buy');
+            } else {
+              showToast({
+                type: 'info',
+                title: `${item.symbol} Benchmark`,
+                message: `${item.raw.name} is currently trading at $${item.price.toFixed(2)} (${item.changePercent >= 0 ? '+' : ''}${item.changePercent}%).`,
+              });
+            }
+          }}
+        />
       </div>
 
       <main className="flex-1">
@@ -283,7 +297,7 @@ export default function App() {
             showToast({
               type: 'info',
               title: `${item.symbol} Benchmark`,
-              message: `${item.name} is currently trading at $${item.price.toFixed(2)}.`,
+              message: `${item.name} is currently trading at $${item.price.toFixed(2)} (${item.changePercent >= 0 ? '+' : ''}${item.changePercent}%).`,
             });
           }}
         />

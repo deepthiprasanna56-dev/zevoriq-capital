@@ -3,6 +3,7 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   Activity,
+  Eye,
 } from 'lucide-react';
 import Sparkline from '../common/Sparkline';
 
@@ -45,8 +46,9 @@ export default function MarketOverview({ indices = [], onSelectAsset }) {
             {categories.map((cat) => (
               <button
                 key={cat.id}
+                type="button"
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                   activeCategory === cat.id
                     ? 'bg-blue-600 text-white shadow-md'
                     : 'text-slate-400 hover:text-white'
@@ -66,7 +68,7 @@ export default function MarketOverview({ indices = [], onSelectAsset }) {
               <div
                 key={item.id}
                 onClick={() => onSelectAsset && onSelectAsset(item)}
-                className="glass-panel glass-panel-hover rounded-2xl p-5 border border-slate-800/80 cursor-pointer relative overflow-hidden group"
+                className="glass-panel glass-panel-hover rounded-2xl p-5 border border-slate-800/80 cursor-pointer relative overflow-hidden group transition-all"
               >
                 {/* Top Row: Symbol, Category, Status badge */}
                 <div className="flex items-center justify-between mb-3">
@@ -147,10 +149,16 @@ export default function MarketOverview({ indices = [], onSelectAsset }) {
                     <span className="text-[10px] text-slate-500 block uppercase">24h Low</span>
                     <span className="text-slate-200 font-semibold">${item.low.toLocaleString()}</span>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right flex flex-col justify-between items-end">
                     <span className="text-[10px] text-slate-500 block uppercase">Vol</span>
                     <span className="text-slate-200 font-semibold">{item.volume}</span>
                   </div>
+                </div>
+
+                {/* Click pill */}
+                <div className="mt-3 pt-2 text-[10px] text-blue-400 font-medium flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Eye className="w-3 h-3" />
+                  <span>Inspect Asset</span>
                 </div>
               </div>
             );

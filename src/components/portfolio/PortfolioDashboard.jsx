@@ -77,8 +77,9 @@ export default function PortfolioDashboard({
           </div>
 
           <button
+            type="button"
             onClick={onDepositFunds}
-            className="self-start md:self-auto px-4 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 hover:text-white text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-blue-950/40"
+            className="self-start md:self-auto px-4 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 hover:text-white text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-blue-950/40 cursor-pointer"
           >
             <PlusCircle className="w-4 h-4 text-blue-400" />
             <span>Deposit $10,000 Demo Funds</span>
@@ -169,11 +170,12 @@ export default function PortfolioDashboard({
               {['1D', '1W', '1M', '1Y', 'ALL'].map((tf) => (
                 <button
                   key={tf}
+                  type="button"
                   onClick={() => {
                     setTimeframe(tf);
                     setHoveredPoint(null);
                   }}
-                  className={`px-3 py-1.5 rounded-lg transition ${
+                  className={`px-3 py-1.5 rounded-lg transition cursor-pointer ${
                     timeframe === tf
                       ? 'bg-blue-600 text-white shadow-md'
                       : 'text-slate-400 hover:text-white'
@@ -201,7 +203,7 @@ export default function PortfolioDashboard({
                 </div>
               ) : (
                 <div className="text-xs text-slate-500 font-mono">
-                  Hover over the chart nodes to inspect historical valuations.
+                  Hover or tap chart points to inspect valuations ({timeframe}).
                 </div>
               )}
             </div>
@@ -252,6 +254,7 @@ export default function PortfolioDashboard({
                     key={idx}
                     className="cursor-pointer group"
                     onMouseEnter={() => setHoveredPoint(pt)}
+                    onClick={() => setHoveredPoint(pt)}
                   >
                     <circle
                       cx={pt.x}

@@ -72,7 +72,7 @@ export default function TradingTerminal({
     setLastExecutedTrade(tradeReceipt);
     setIsSuccessModalOpen(true);
 
-    // Confetti effect!
+    // Confetti celebration effect
     try {
       confetti({
         particleCount: 80,
@@ -85,6 +85,14 @@ export default function TradingTerminal({
     }
 
     onExecuteTrade(tradeReceipt);
+  };
+
+  const handleViewUpdatedPortfolio = () => {
+    setIsSuccessModalOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById('portfolio');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -118,7 +126,7 @@ export default function TradingTerminal({
                 <button
                   type="button"
                   onClick={() => setActiveTab('buy')}
-                  className={`flex-1 py-3 rounded-xl text-sm font-extrabold transition-all ${
+                  className={`flex-1 py-3 rounded-xl text-sm font-extrabold transition-all cursor-pointer ${
                     activeTab === 'buy'
                       ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-950/50'
                       : 'text-slate-400 hover:text-white'
@@ -129,7 +137,7 @@ export default function TradingTerminal({
                 <button
                   type="button"
                   onClick={() => setActiveTab('sell')}
-                  className={`flex-1 py-3 rounded-xl text-sm font-extrabold transition-all ${
+                  className={`flex-1 py-3 rounded-xl text-sm font-extrabold transition-all cursor-pointer ${
                     activeTab === 'sell'
                       ? 'bg-rose-600 text-white shadow-lg shadow-rose-950/50'
                       : 'text-slate-400 hover:text-white'
@@ -181,7 +189,7 @@ export default function TradingTerminal({
                       key={ot.id}
                       type="button"
                       onClick={() => setOrderType(ot.id)}
-                      className={`py-2 px-2.5 rounded-xl text-xs font-semibold border transition ${
+                      className={`py-2 px-2.5 rounded-xl text-xs font-semibold border transition cursor-pointer ${
                         orderType === ot.id
                           ? 'border-blue-500 bg-blue-600/20 text-blue-300'
                           : 'border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white'
@@ -214,14 +222,14 @@ export default function TradingTerminal({
                     className="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-2.5 text-white font-mono font-bold text-sm focus:outline-none focus:border-blue-500"
                     placeholder="10"
                   />
-                  {/* Quick percentage buttons */}
+                  {/* Quick percentage / count buttons */}
                   <div className="flex gap-1.5 mt-2">
                     {['1', '5', '10', '25', '50'].map((preset) => (
                       <button
                         key={preset}
                         type="button"
                         onClick={() => setQuantity(preset)}
-                        className="flex-1 py-1 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded text-[10px] font-mono font-semibold"
+                        className="flex-1 py-1 bg-slate-800/80 hover:bg-slate-700 text-slate-300 rounded text-[10px] font-mono font-semibold transition cursor-pointer"
                       >
                         {preset}
                       </button>
@@ -257,7 +265,7 @@ export default function TradingTerminal({
               {/* Submit CTA */}
               <button
                 type="submit"
-                className={`w-full py-4 rounded-xl text-sm font-extrabold uppercase tracking-wider text-white shadow-xl transition transform active:scale-98 ${
+                className={`w-full py-4 rounded-xl text-sm font-extrabold uppercase tracking-wider text-white shadow-xl transition transform active:scale-98 cursor-pointer ${
                   activeTab === 'buy'
                     ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-emerald-950/50'
                     : 'bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 shadow-rose-950/50'
@@ -399,14 +407,16 @@ export default function TradingTerminal({
 
           <div className="flex gap-2 pt-2">
             <button
+              type="button"
               onClick={() => setIsConfirmModalOpen(false)}
-              className="flex-1 py-2.5 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-xl transition"
+              className="flex-1 py-2.5 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-xl transition cursor-pointer"
             >
               Cancel
             </button>
             <button
+              type="button"
               onClick={handleConfirmOrder}
-              className={`flex-1 py-2.5 text-xs font-bold text-white rounded-xl transition ${
+              className={`flex-1 py-2.5 text-xs font-bold text-white rounded-xl transition cursor-pointer ${
                 activeTab === 'buy'
                   ? 'bg-emerald-600 hover:bg-emerald-500'
                   : 'bg-rose-600 hover:bg-rose-500'
@@ -460,8 +470,9 @@ export default function TradingTerminal({
             </div>
 
             <button
-              onClick={() => setIsSuccessModalOpen(false)}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl transition"
+              type="button"
+              onClick={handleViewUpdatedPortfolio}
+              className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded-xl transition cursor-pointer shadow-lg shadow-blue-600/30"
             >
               View Updated Portfolio
             </button>

@@ -22,6 +22,17 @@ export default function StockDetailModal({
 
   const isPositive = stock.changePercent >= 0;
 
+  // Timeframe sparklines
+  const defaultSpark = stock.sparkline || [132.5, 133.8, 135.2, 134.6, 136.9, 137.5, 138.25];
+  const timeframeData = {
+    '1D': defaultSpark,
+    '1W': [stock.price * 0.94, stock.price * 0.96, stock.price * 0.95, stock.price * 0.98, stock.price * 0.97, stock.price],
+    '1M': [stock.price * 0.88, stock.price * 0.91, stock.price * 0.89, stock.price * 0.94, stock.price * 0.97, stock.price],
+    '1Y': [stock.price * 0.65, stock.price * 0.72, stock.price * 0.82, stock.price * 0.89, stock.price * 0.95, stock.price],
+  };
+
+  const currentSparkline = timeframeData[activeRange] || defaultSpark;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="max-w-3xl">
       <div className="space-y-6">
@@ -46,8 +57,9 @@ export default function StockDetailModal({
 
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={() => onToggleWatchlist(stock.symbol)}
-              className={`p-2 rounded-xl border transition flex items-center gap-1.5 text-xs font-semibold ${
+              className={`p-2 rounded-xl border transition flex items-center gap-1.5 text-xs font-semibold cursor-pointer ${
                 isWatchlisted
                   ? 'border-amber-500/40 bg-amber-500/10 text-amber-300'
                   : 'border-slate-700 bg-slate-800 text-slate-300 hover:text-white'
@@ -90,15 +102,16 @@ export default function StockDetailModal({
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
               <BarChart2 className="w-4 h-4 text-blue-400" />
-              <span>Session Depth & Trend Curve</span>
+              <span>Session Depth & Trend Curve ({activeRange})</span>
             </span>
 
             <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
               {['1D', '1W', '1M', '1Y'].map((rng) => (
                 <button
                   key={rng}
+                  type="button"
                   onClick={() => setActiveRange(rng)}
-                  className={`px-3 py-1 rounded-lg transition ${
+                  className={`px-3 py-1 rounded-lg transition cursor-pointer ${
                     activeRange === rng
                       ? 'bg-blue-600 text-white'
                       : 'text-slate-400 hover:text-white'
@@ -112,7 +125,7 @@ export default function StockDetailModal({
 
           <div className="w-full h-44 flex items-center justify-center pt-2">
             <Sparkline
-              data={stock.sparkline}
+              data={currentSparkline}
               isPositive={isPositive}
               width={560}
               height={140}
@@ -151,20 +164,22 @@ export default function StockDetailModal({
         {/* Modal Action CTA */}
         <div className="flex gap-3 pt-2">
           <button
+            type="button"
             onClick={() => {
               onClose();
               onTrade(stock, 'buy');
             }}
-            className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-emerald-950/40"
+            className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-emerald-950/40 cursor-pointer"
           >
             Execute Buy Order
           </button>
           <button
+            type="button"
             onClick={() => {
               onClose();
               onTrade(stock, 'sell');
             }}
-            className="flex-1 py-3 bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-rose-950/40"
+            className="flex-1 py-3 bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-rose-950/40 cursor-pointer"
           >
             Execute Sell Order
           </button>
