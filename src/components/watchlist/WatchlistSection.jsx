@@ -35,7 +35,7 @@ export default function WatchlistSection({
 
   return (
     <section id="watchlist" className="py-20 relative border-t border-slate-800/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-0">
         
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">

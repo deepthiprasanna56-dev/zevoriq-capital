@@ -52,7 +52,7 @@ export default function Footer({ onShowToast }) {
   return (
     <>
       <footer className="bg-[#05080e] border-t border-slate-800/80 pt-16 pb-12 text-slate-400 text-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-0">
           
           {/* Top Row: Brand & Newsletter */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800/80">

@@ -97,7 +97,7 @@ export default function TradingTerminal({
 
   return (
     <section id="terminal" className="py-20 relative border-t border-slate-800/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-0">
         
         {/* Section Header */}
         <div className="mb-10 text-center max-w-2xl mx-auto">

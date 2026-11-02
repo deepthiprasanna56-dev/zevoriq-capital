@@ -30,6 +30,9 @@ export default function App() {
   const [cashBalance, setCashBalance] = useState(45200.50);
   const [watchlistSymbols, setWatchlistSymbols] = useState(INITIAL_WATCHLIST_SYMBOLS);
 
+  // Hero Preset Switcher (1: Premium Minimal Bull, 2: Elegant Dark Skyline, 3: Luxury Finance Globe, 4: Modern Fintech Mobile)
+  const [heroPreset, setHeroPreset] = useState(1);
+
   // Selected Stock Symbol & Trade Mode
   const [selectedSymbol, setSelectedSymbol] = useState('NVDA');
   const [tradeMode, setTradeMode] = useState('buy');
@@ -233,7 +236,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070b12] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#070709] text-slate-100 flex flex-col font-sans">
       
       {/* 1. Sticky Navigation Bar */}
       <Navbar
@@ -254,9 +257,11 @@ export default function App() {
         onChangeCurrency={setCurrency}
         onQuickSearchSelect={(stock) => handleOpenStockDetail(stock)}
         popularStocks={stocks}
+        heroPreset={heroPreset}
+        onChangeHeroPreset={setHeroPreset}
       />
 
-      {/* 2. Live Marquee Ticker Tape with Clickable Ticker Items */}
+      {/* 2. Live Marquee Ticker Tape */}
       <div className="pt-16 sm:pt-20">
         <TickerTape
           indices={indices}
@@ -276,8 +281,9 @@ export default function App() {
       </div>
 
       <main className="flex-1">
-        {/* 3. Hero Section */}
+        {/* 3. Hero Section (Renders Option 1, 2, 3, or 4 with luxury black/gold aesthetic) */}
         <Hero
+          preset={heroPreset}
           onStartTrading={() => {
             const el = document.getElementById('terminal');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -286,7 +292,14 @@ export default function App() {
             const el = document.getElementById('markets');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
-          onQuickSelectStock={(stock, mode) => handleTradeStock(stock, mode)}
+          onOpenDashboard={() => {
+            const el = document.getElementById('portfolio');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
+          onOpenAuth={(mode) => {
+            setAuthModalMode(mode);
+            setIsAuthModalOpen(true);
+          }}
           featuredStock={selectedStock}
         />
 
