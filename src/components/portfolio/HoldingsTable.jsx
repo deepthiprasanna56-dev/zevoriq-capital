@@ -22,7 +22,7 @@ export default function HoldingsTable({ holdings = [], onTradeHolding }) {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs font-mono">
+        <table className="w-full min-w-[720px] text-left text-xs font-mono">
           <thead className="bg-slate-900/80 text-slate-400 border-b border-slate-800 uppercase text-[11px] font-sans">
             <tr>
               <th className="py-3.5 px-4">Asset</th>

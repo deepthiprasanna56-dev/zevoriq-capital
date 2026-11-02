@@ -48,7 +48,7 @@ export default function StockMarket({
 
   return (
     <section id="stocks" className="py-20 relative border-t border-slate-800/80">
-      <div className="w-full px-0">
+      <div className="mx-auto w-full max-w-[1600px] px-0">
         
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
@@ -68,7 +68,7 @@ export default function StockMarket({
           {/* Controls: Search, Sort & View Mode */}
           <div className="flex flex-wrap items-center gap-3">
             {/* Search Input */}
-            <div className="relative min-w-[200px]">
+            <div className="relative min-w-0 flex-1 sm:min-w-[200px]">
               <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
@@ -263,7 +263,7 @@ export default function StockMarket({
           /* View Mode 2: Pro Data Table View */
           <div className="glass-panel rounded-2xl border border-slate-800/80 overflow-hidden shadow-xl">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs font-mono">
+              <table className="w-full min-w-[760px] text-left text-xs font-mono">
                 <thead className="bg-slate-900/90 text-slate-400 border-b border-slate-800 uppercase text-[11px] font-sans">
                   <tr>
                     <th className="py-3.5 px-4">Asset</th>

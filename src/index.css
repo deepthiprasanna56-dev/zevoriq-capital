@@ -3,62 +3,116 @@
 @layer base {
   :root {
     --color-bg-dark: #070709;
-    --color-card-dark: #0e0e14;
-    --color-gold-light: #f5df9e;
-    --color-gold-primary: #dfb25d;
+    --color-card-dark: #0d0d12;
+    --color-gold-light: #f7e6bc;
+    --color-gold-primary: #dfb15b;
     --color-gold-dark: #b8862d;
-    --color-accent-emerald: #10b981;
+    --color-accent-emerald: #dfb15b;
     --color-accent-rose: #f43f5e;
+    --color-blue-300: #f0d79f;
+    --color-blue-400: #dfb967;
+    --color-blue-500: #c99a48;
+    --color-blue-600: #a97931;
+    --color-blue-700: #805a29;
+    --color-blue-900: #382b19;
+    --color-blue-950: #17120b;
+    --color-indigo-300: #efd397;
+    --color-indigo-400: #dfb967;
+    --color-indigo-500: #c99a48;
+    --color-indigo-600: #a97931;
+    --color-indigo-700: #805a29;
+    --color-cyan-300: #f3dfb4;
+    --color-cyan-400: #dfb967;
+    --color-cyan-500: #c99a48;
+    --color-emerald-300: #f0d79f;
+    --color-emerald-400: #dfb967;
+    --color-emerald-500: #c99a48;
+    --color-emerald-600: #ad813b;
+    --color-emerald-700: #805a29;
+    --color-emerald-800: #59401f;
+    --color-emerald-900: #382b19;
+    --color-emerald-950: #17120b;
+    --color-green-300: #f0d79f;
+    --color-green-400: #dfb967;
+    --color-green-500: #c99a48;
+    --color-green-600: #ad813b;
+    --color-green-700: #805a29;
+    --color-green-800: #59401f;
+    --color-green-900: #382b19;
+    --color-green-950: #17120b;
+    --color-teal-300: #f0d79f;
+    --color-teal-400: #dfb967;
+    --color-teal-500: #c99a48;
+    --color-teal-600: #ad813b;
+    --color-teal-700: #805a29;
+    --color-teal-800: #59401f;
+    --color-teal-900: #382b19;
+    --color-teal-950: #17120b;
+    --color-slate-300: #d9d1c4;
+    --color-slate-400: #b8ae9e;
+    --color-slate-500: #938978;
+    --color-slate-600: #746a5a;
+    --color-slate-700: #50483c;
+    --color-slate-800: #302b24;
+    --color-slate-900: #191612;
   }
 
   body {
     background-color: #070709;
-    color: #f1f5f9;
+    color: #eee6d8;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
   }
 }
 
+.font-serif-luxury {
+  font-family: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
 /* Luxury Gold & Obsidian Styling */
 .gold-gradient-text {
-  background: linear-gradient(135deg, #fff3d1 0%, #edd28e 35%, #dfb15b 70%, #b8862d 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #faecd0 30%, #e0b460 70%, #b8862d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gold-gradient-btn {
-  background: linear-gradient(135deg, #f7e2a9 0%, #dfb15b 50%, #c99330 100%);
-  color: #0a0a0c;
+  background: linear-gradient(135deg, #fce9bd 0%, #dfb15b 50%, #c99330 100%);
+  color: #09090c;
   font-weight: 700;
-  box-shadow: 0 4px 20px -2px rgba(223, 177, 91, 0.35);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px -2px rgba(223, 177, 91, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .gold-gradient-btn:hover {
-  background: linear-gradient(135deg, #fff0c7 0%, #ecc069 50%, #dba63b 100%);
-  box-shadow: 0 6px 28px rgba(223, 177, 91, 0.55);
+  background: linear-gradient(135deg, #fff3d4 0%, #e8bd66 50%, #d89f36 100%);
+  box-shadow: 0 6px 28px rgba(223, 177, 91, 0.6);
   transform: translateY(-1px);
 }
 
 .gold-outline-btn {
-  background: rgba(223, 177, 91, 0.05);
-  border: 1px solid rgba(223, 177, 91, 0.4);
-  color: #f3dfa2;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(223, 177, 91, 0.03);
+  border: 1px solid rgba(223, 177, 91, 0.45);
+  color: #f7e2a9;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .gold-outline-btn:hover {
-  background: rgba(223, 177, 91, 0.15);
-  border-color: rgba(223, 177, 91, 0.8);
+  background: rgba(223, 177, 91, 0.12);
+  border-color: rgba(223, 177, 91, 0.9);
   color: #ffffff;
   transform: translateY(-1px);
 }
 
 .glass-panel {
-  background: rgba(14, 14, 20, 0.82);
+  background: rgba(13, 13, 18, 0.85);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(223, 177, 91, 0.12);
+  border: 1px solid rgba(223, 177, 91, 0.14);
 }
 
 .glass-panel-hover {
@@ -66,33 +120,32 @@
 }
 
 .glass-panel-hover:hover {
-  background: rgba(22, 22, 32, 0.9);
-  border-color: rgba(223, 177, 91, 0.3);
+  background: rgba(20, 20, 28, 0.92);
+  border-color: rgba(223, 177, 91, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.8), 0 0 24px -6px rgba(223, 177, 91, 0.15);
-}
-
-.gold-glow {
-  box-shadow: 0 0 35px -5px rgba(223, 177, 91, 0.3);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.85), 0 0 24px -6px rgba(223, 177, 91, 0.2);
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
-  background: #070709;
+  display: none;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #23232c;
-  border-radius: 9999px;
+  display: none;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b3a48;
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 @keyframes pulseGlow {
@@ -117,4 +170,70 @@
 
 .ticker-track:hover {
   animation-play-state: paused;
+}
+
+.hero-section {
+  background:
+    radial-gradient(ellipse at 74% 57%, rgba(168, 102, 38, .2), transparent 43%),
+    linear-gradient(100deg, #04090c 0%, #080b0d 50%, #0b0b0a 100%);
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 35%, rgba(202, 136, 66, .06) 72%, transparent 100%);
+}
+
+.hero-copy {
+  padding-left: clamp(18px, 2.4vw, 42px);
+  border-left: 1px solid rgba(223, 177, 91, .52);
+}
+
+.hero-bull-image {
+  mix-blend-mode: lighten;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 96%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 96%, transparent 100%);
+}
+
+.market-overview-section {
+  background: linear-gradient(118deg, #090c0e 0%, #07090b 50%, #080b0d 100%);
+}
+
+.market-overview-glow {
+  position: absolute;
+  left: 3%;
+  bottom: -100px;
+  width: 440px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(189, 119, 48, .1);
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.market-chart-card {
+  background: linear-gradient(145deg, rgba(19, 21, 22, .84), rgba(7, 10, 12, .94));
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .28);
+}
+
+@media (max-width: 1023px) {
+  .hero-copy { border-left: 0; padding-left: 0; }
+}
+
+main > section[id] {
+  scroll-margin-top: 84px;
+}
+
+main > section:not(#home):not(#markets) {
+  padding-inline: clamp(1rem, 3.5vw, 3rem);
+}
+
+@media (max-width: 639px) {
+  main { padding-top: 64px; }
+  .hero-section { padding-top: 1rem; }
+  .hero-inner { padding-inline: 1.25rem; }
+  .hero-art { margin-inline: -0.75rem; }
+  .hero-bull-image { -webkit-mask-image: none; mask-image: none; }
 }

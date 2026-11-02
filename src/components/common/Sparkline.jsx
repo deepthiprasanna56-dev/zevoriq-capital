@@ -22,7 +22,7 @@ export default function Sparkline({ data = [], isPositive = true, width = 110, h
   const pathD = `M ${points.join(' L ')}`;
   const areaD = `${pathD} L ${width},${height} L 0,${height} Z`;
 
-  const strokeColor = isPositive ? '#10b981' : '#f43f5e';
+  const strokeColor = isPositive ? '#dfb15b' : '#f43f5e';
 
   return (
     <svg width={width} height={height} className="overflow-visible inline-block">

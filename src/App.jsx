@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/navbar/Navbar';
-import TickerTape from './components/hero/TickerTape';
 import Hero from './components/hero/Hero';
 import MarketOverview from './components/markets/MarketOverview';
 import StockMarket from './components/stocks/StockMarket';
@@ -44,15 +43,9 @@ export default function App() {
   // Auth State
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState('login');
-  const [user, setUser] = useState({
-    name: 'Alex Mercer',
-    email: 'trader.demo@zevoriq.com',
-    accountType: 'Pro Trader Tier',
-    avatar: 'A',
-  });
+  const [user, setUser] = useState(null);
 
   // Settings & Notifications
-  const [currency, setCurrency] = useState('USD');
   const [toasts, setToasts] = useState([]);
   const [isLiveSimulationActive, setIsLiveSimulationActive] = useState(true);
 
@@ -253,34 +246,13 @@ export default function App() {
             message: 'Your trading session has been safely secured and closed.',
           });
         }}
-        currency={currency}
-        onChangeCurrency={setCurrency}
         onQuickSearchSelect={(stock) => handleOpenStockDetail(stock)}
         popularStocks={stocks}
         heroPreset={heroPreset}
         onChangeHeroPreset={setHeroPreset}
       />
 
-      {/* 2. Live Marquee Ticker Tape */}
-      <div className="pt-16 sm:pt-20">
-        <TickerTape
-          indices={indices}
-          stocks={stocks}
-          onSelectAsset={(item) => {
-            if (!item.isIndex) {
-              handleTradeStock(item.raw, 'buy');
-            } else {
-              showToast({
-                type: 'info',
-                title: `${item.symbol} Benchmark`,
-                message: `${item.raw.name} is currently trading at $${item.price.toFixed(2)} (${item.changePercent >= 0 ? '+' : ''}${item.changePercent}%).`,
-              });
-            }
-          }}
-        />
-      </div>
-
-      <main className="flex-1">
+      <main className="flex-1 pt-[76px]">
         {/* 3. Hero Section (Renders Option 1, 2, 3, or 4 with luxury black/gold aesthetic) */}
         <Hero
           preset={heroPreset}

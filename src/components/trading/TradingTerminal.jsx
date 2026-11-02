@@ -78,7 +78,7 @@ export default function TradingTerminal({
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: activeTab === 'buy' ? ['#10b981', '#3b82f6', '#60a5fa'] : ['#f43f5e', '#fb7185', '#38bdf8'],
+        colors: activeTab === 'buy' ? ['#dfb15b', '#c99a48', '#f0d79f'] : ['#f43f5e', '#fb7185', '#38bdf8'],
       });
     } catch {
       // Ignore if unavailable

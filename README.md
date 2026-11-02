@@ -1,148 +1,68 @@
-# Zevoriq Capital — Next-Gen Trading & Investment Platform
+# Zevoriq Capital
 
-![Zevoriq Capital Platform Preview](https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1400&q=80)
+Zevoriq Capital is a responsive, finance-themed trading dashboard built with React and Vite. Explore sample market data, manage a simulated portfolio, and try a front-end trading workflow in a polished, dark interface.
 
-> A modern, high-performance, responsive Trading & Investment Web Platform built with **React 19**, **Vite**, **Tailwind CSS v4**, and **Lucide Icons**. Designed to provide traders and institutional capital allocators with real-time market data, direct DMA execution simulations, portfolio tracking, and interactive depth analytics.
+> **Demo only:** This project does not connect to a brokerage, execute real trades, or provide live market data or financial advice. Prices and account activity are simulated, and changes are kept in browser memory only. Reloading the page resets the demo.
 
----
+## Features
 
-## 🌟 Key Features & Sections
+- **Market overview** — Browse sample global indices, equities, crypto assets, and commodities with price-change indicators and sparklines.
+- **Stock explorer** — Filter and browse featured stocks in grid or table view, open a detail panel, and add symbols to your watchlist.
+- **Simulated trading terminal** — Try buy and sell flows with market, limit, and stop order options, quantity controls, and an order confirmation step.
+- **Portfolio dashboard** — Review demo holdings, cash balance, and estimated portfolio performance; trades and demo deposits update the dashboard during the session.
+- **Watchlist and price simulation** — Track selected symbols and toggle simulated price movement.
+- **Market news** — Browse sample articles by category and open article details.
+- **Responsive interface** — Navigate the dashboard on desktop and mobile, with symbol search available from the navigation bar (`/`).
 
-### 1. Dynamic Navigation & Market Bar
-- **Brand Identity**: Futuristic gradient logo with live status indicator.
-- **Live Market Clock**: Real-time EST clock indicator tracking market sessions.
-- **Instant Search Modal**: Global hotkey (`/`) search across all equity symbols and company profiles.
-- **Currency Switcher**: Real-time multi-currency support (`USD $`, `EUR €`, `GBP £`, `INR ₹`).
-- **Institutional Authentication**: Interactive Auth Modal with one-click demo credentials for retail traders and institutional desks.
-- **Mobile Responsive Drawer**: Smooth slide-over navigation menu for mobile devices.
+## Tech stack
 
-### 2. Live Marquee Ticker Tape
-- Infinite smooth CSS ticker marquee streaming real-time prices for major global indices (S&P 500, NASDAQ, Dow Jones, FTSE 100, Nikkei 225, Bitcoin, Ethereum, Gold, Crude Oil) and popular equities.
+- [React 19](https://react.dev/)
+- [Vite](https://vite.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Lucide React](https://lucide.dev/) for icons
+- [canvas-confetti](https://www.npmjs.com/package/canvas-confetti) for trade confirmation effects
 
-### 3. Hero Section
-- High-impact headline with neon gradient typography and value propositions.
-- **Interactive Live Hero Widget**: Real-time price fluctuations, active order book depth preview (Top Bid / Ask), timeframe buttons (`1D`, `1W`, `1M`, `1Y`), and quick Buy/Sell triggers.
-- Institutional trust badges: Zero Commission, SIPC Protection (\$500,000), Sub-15ms Execution.
-
-### 4. Global Market Overview
-- Comprehensive multi-asset index cards with 24h high/low and volume metrics.
-- Up/Down indicators and crisp SVG Sparkline area charts.
-- Category filters: **All Markets**, **US Equities**, **Global Indices**, **Crypto Assets**, **Commodities**.
-
-### 5. Stock Market Section
-- Curated list of popular & trending equities (`NVDA`, `AAPL`, `MSFT`, `TSLA`, `AMZN`, `GOOGL`, `META`, `AMD`, `PLTR`, `COIN`, `JPM`, `LLY`).
-- **Dual View Modes**: Switch between sleek **Grid Cards View** and institutional **Pro Data Table View**.
-- Filter by sector pills (*Semiconductors*, *Consumer Electronics*, *Cloud AI*, *Clean Tech*, *Banking*).
-- Interactive Sparklines, Star-to-Watchlist quick toggles, and Direct Buy/Sell action buttons.
-
-### 6. Stock Deep-Dive Analytics Modal
-- Full company intelligence breakdown.
-- Multi-timeframe trend curve (`1D`, `1W`, `1M`, `1Y`).
-- Fundamental key statistics: Market Cap, P/E Ratio, Analyst Consensus meter, Target Price.
-
-### 7. Institutional Trading Terminal
-- Order type switching: **Market Order**, **Limit Order**, **Stop Loss**.
-- Quantity presets (`1`, `5`, `10`, `25`, `50`) with instant subtotal and regulatory fee calculations.
-- Available cash purchasing power validation and position checks.
-- Order confirmation modal with risk review.
-- Success confirmation dialogue with celebratory confetti animation (`canvas-confetti`) and instant portfolio sync.
-
-### 8. Real-Time Portfolio Dashboard
-- **Key Performance KPIs**:
-  - Total Portfolio Value (dynamically updated on trades)
-  - Total Unrealized Profit/Loss (\$) and ROI (%)
-  - Today's Session Change
-  - Available Liquid Purchasing Power
-- **Interactive Performance Chart**: Responsive SVG area curve with hover tooltips displaying historical valuation points.
-- **Active Holdings Table**: Breakdown of owned shares, cost basis, current market value, unrealized P&L, and quick liquidate / buy more actions.
-- **Deposit Demo Funds Action**: Add \$10,000 in simulated liquidity with 1 click.
-
-### 9. Personalized Watchlist
-- Pin / unpin any security with one click.
-- **Live Price Simulation Engine**: Toggle live price ticking ON/OFF to simulate real-time market oscillations with green/red flashes.
-- Quick symbol add selector dropdown.
-
-### 10. Market News Wire & Research
-- Curated macroeconomic, AI technology, crypto ETF, and energy reports.
-- Sentiment tags (*Bullish*, *Neutral*, *Bearish*) and read time indicators.
-- **Read More Interactive Reader**: Full article modal with desk takeaways and source citations.
-
-### 11. Platform Benchmark Matrix (Why Choose Us)
-- Comparison table highlighting Zevoriq Capital advantages vs traditional legacy retail brokers (Execution Latency, DMA Routing, AI Sentiment, Zero Commission).
-
-### 12. Institutional Footer & Legal Disclosures
-- Newsletter subscription form with automated confirmation toasts.
-- Interactive **Legal Disclosure Modal** with tabs for:
-  - Privacy Safeguard & Data Encryption Protocol
-  - Platform Terms of Execution
-  - FINRA / SIPC Regulatory Notice
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-- **Framework**: [React 19](https://react.dev/)
-- **Build Tool**: [Vite 8](https://vite.dev/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **FX / Feedback**: [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
-- **Typography**: Plus Jakarta Sans & JetBrains Mono
-
----
-
-## 🚀 Getting Started Locally
+## Getting started
 
 ### Prerequisites
-- Node.js 18+ (tested with Node.js 20+)
-- npm or pnpm
 
-### Installation
+- Node.js and npm
+
+### Install and run
 
 ```bash
-# Clone the repository
-git clone https://github.com/<your-username>/zevoriq-capital.git
-
-# Navigate into the project folder
+git clone <repository-url>
 cd zevoriq-capital
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
-### Production Build & Linting
+Open the local URL printed by Vite to use the app.
 
-```bash
-# Run production build
-npm run build
+## Available scripts
 
-# Run ESLint validation
-npm run lint
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run build` | Create a production build in `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
 
-# Preview production build locally
-npm run preview
+## Project structure
+
+```text
+src/
+  components/   Dashboard sections and reusable UI components
+  data/         Sample market, portfolio, and news data
+  App.jsx       Application state and page composition
+  index.css     Tailwind import and global styles
+public/         Static assets
 ```
 
----
+## Deployment
 
-## 🌐 Deployment Instructions
+Build the project with `npm run build`, then deploy the generated `dist/` directory to any static hosting provider that supports single-page applications. Configure the host to serve `index.html` for application routes.
 
-### Deploy to Vercel
-1. Push your repository to GitHub.
-2. Sign in to [Vercel](https://vercel.com) and click **"New Project"**.
-3. Import the `zevoriq-capital` repository.
-4. Framework Preset will auto-detect as **Vite**.
-5. Click **Deploy**.
+## Disclaimer
 
-### Deploy to Netlify
-1. Connect your repository to [Netlify](https://netlify.com).
-2. Set Build Command: `npm run build`
-3. Set Publish Directory: `dist`
-4. Click **Deploy Site**.
-
----
-
-## 📄 License
-This project is open-source and available under the [MIT License](LICENSE).
+Zevoriq Capital is a software demonstration, not a financial service. It is not affiliated with a broker or exchange. Do not enter real credentials or use the simulated prices, orders, or performance figures to make investment decisions.
